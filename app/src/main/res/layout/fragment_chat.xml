@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+      <variable
+          name="chatViewModel"
+          type="com.example.inchat.view_model.ChatViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/ic_back_filled_arrow"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@{chatViewModel.currentUser.userName}"
+                tools:text="SERGIO LEECH"
+                android:paddingStart="100dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/userAvatar"
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/ic_anonymous_mask"
+                android:padding="10dp"
+                app:setImage="@{chatViewModel.currentUser.userImage}"
+                tools:ignore="ContentDescription"
+                tools:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/r1"
+            android:layout_below="@id/l1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:background="@android:color/black" />
+
+        <RelativeLayout
+            android:id="@+id/r1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/black"
+                    android:hint="input message"
+                    android:textColorHint="@android:color/white"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_green_dark" />
+
+                <ImageButton
+                    android:id="@+id/btnSendMessage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@android:color/black"
+                    android:src="@drawable/ic_baseline_arrow_circle_up_24"
+                    android:text="Sent"
+                    android:textColor="@android:color/holo_green_dark"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

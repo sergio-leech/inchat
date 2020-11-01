@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "253803334316",
+    "firebase_url": "https://fir-chat-819f8.firebaseio.com",
+    "project_id": "fir-chat-819f8",
+    "storage_bucket": "fir-chat-819f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253803334316:android:55985529107eaecb912d09",
+        "android_client_info": {
+          "package_name": "com.example.inchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253803334316-irilqbjbq43ck1v4r6bqrk61eao1ceoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_LhYMcNnc7LKqkKLOXZiHViNGhD0fQMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253803334316-irilqbjbq43ck1v4r6bqrk61eao1ceoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
