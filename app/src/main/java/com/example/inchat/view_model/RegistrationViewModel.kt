@@ -11,12 +11,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.inchat.firebase.FirebaseUtil
 import com.example.inchat.model.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel @ViewModelInject constructor(private val firebaseUtil: FirebaseUtil) :
     ViewModel() {
 
-    val register = firebaseUtil
+    fun registrationUser(userName: String, email: String, password: String, chat: () -> Unit){
+        viewModelScope.launch{
+            firebaseUtil.registerUser(userName = userName,email = email,password = password,chat = chat)
+        }
+    }
+
+
    /* private  val _userList = MutableLiveData<List<User>>()
     val userList:LiveData<List<User>> = _userList*/
    /* var userList :List<User> by mutableStateOf(listOf())

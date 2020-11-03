@@ -22,21 +22,16 @@ class UsersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return ComposeView(requireContext()).apply {
             setContent {
                 InchatTheme() {
-                    // UserChat(viewModel = viewModel,exitFromProfile = {navigationToSignIn()})
                     UsersScreen(viewModel = viewModel, userProfile = { navigationToProfile() },this)
                 }
             }
         }
     }
 
-
-
     private fun navigationToProfile() {
         this.findNavController().navigate(R.id.action_chatFragment_to_profileFragment)
     }
-
 }

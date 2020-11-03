@@ -2,16 +2,12 @@ package com.example.inchat.ui.chat_compose
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -52,10 +48,6 @@ fun Chat(name: String, list: List<Message>) {
             Button(
                 backgroundColor = Color.Black,
                 onClick = {},
-               /* modifier = Modifier.drawShadow(
-                    2.dp,
-                    CircleShape
-                ).padding(2.dp).border(2.dp, Color.White, CircleShape)*/
             ) {
                 Text(text = "GO", color = Color.Green)
             }

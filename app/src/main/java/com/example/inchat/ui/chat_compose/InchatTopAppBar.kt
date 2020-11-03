@@ -24,9 +24,6 @@ fun InchatAppBar(
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Column {
-        // This bar needs to be translucent but, if the backgroundColor in TopAppBar is not
-        // opaque, the elevation is ignored. We need to manually calculate the elevated surface
-        // color for dark mode:
         val backgroundColor = Color.Black
         TopAppBar(
             modifier = modifier,

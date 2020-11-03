@@ -43,9 +43,7 @@ fun UserItem(user: User) {
             modifier = Modifier.size(100.dp, 100.dp)
                 .background(color = Color.Blue, shape = CircleShape)
         )
-
         Text(text = user.userName)
-
     }
 }
 

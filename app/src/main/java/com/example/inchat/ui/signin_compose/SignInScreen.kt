@@ -18,13 +18,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import com.example.inchat.R
-import com.example.inchat.view_model.RegistrationViewModel
+import com.example.inchat.view_model.SignInViewModel
 
 //@Preview(showBackground = true)
 @Composable
-fun SignInScreen(viewModel: RegistrationViewModel, signUp: () -> Unit, chatScreen: () -> Unit) {
+fun SignInScreen(viewModel: SignInViewModel, signUp: () -> Unit, chatScreen: () -> Unit) {
     Surface(color = Color.Black) {
         var email by remember { mutableStateOf(TextFieldValue()) }
         var password by remember { mutableStateOf(TextFieldValue()) }
@@ -57,7 +56,7 @@ fun SignInScreen(viewModel: RegistrationViewModel, signUp: () -> Unit, chatScree
                 border = BorderStroke(color = Color.White, width = 2.dp), onClick =
                 {
                     if (email.text.isNotEmpty() && password.text.isNotEmpty()) {
-                         viewModel.register.signIn(email = email.text,password = password.text,chat = {chatScreen()})
+                         viewModel.signIn(email = email.text,password = password.text,chat = {chatScreen()})
                     }
                 }) {
                 Text(text = "Sign In", fontSize = 20.sp, color = Color.White)
@@ -78,6 +77,5 @@ fun SignInScreen(viewModel: RegistrationViewModel, signUp: () -> Unit, chatScree
                 modifier = Modifier.size(300.dp)
             )
         }
-
     }
 }

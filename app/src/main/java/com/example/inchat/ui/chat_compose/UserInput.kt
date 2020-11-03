@@ -4,7 +4,6 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.TextField
@@ -26,7 +25,6 @@ fun UserInput(onTextChanged: (TextFieldValue) -> Unit,
         TextField(
             value =  textFieldValue,
             onValueChange = { onTextChanged(textFieldValue) },
-          //  modifier = Modifier.size(300.dp),
             inactiveColor = Color.White,
             activeColor = Color.Green,
             visualTransformation = VisualTransformation.None,

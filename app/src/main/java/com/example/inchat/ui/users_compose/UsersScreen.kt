@@ -4,7 +4,6 @@ import android.view.View
 import androidx.compose.foundation.*
 import com.example.inchat.R
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -40,14 +39,15 @@ fun UsersScreen(viewModel: UsersViewModel, userProfile: () -> Unit,view: View) {
             },
         ) {
             Column(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
-                LazyColumnFor(items =viewModel.userList ) {user ->
-                  UserItem(user = user,id = user.userId,view )
-                    Spacer(modifier = Modifier.padding(4.dp))
+                val userList= viewModel.userList
+                ScrollableColumn(modifier = Modifier.fillMaxWidth()) {
+                    userList?.forEach { user->
+                        UserItem(user = user,id = user.userId,view )
+                        Spacer(modifier = Modifier.padding(4.dp))
+                    }
                 }
             }
-
         }
-
 }
 
 @Composable

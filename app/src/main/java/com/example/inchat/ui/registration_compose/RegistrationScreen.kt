@@ -88,7 +88,7 @@ fun RegistrationScreen(
                 border = BorderStroke(color = Color.White, width = 2.dp),
                 onClick = {
                     if (email.text.isNotEmpty() && name.text.isNotEmpty() && password.text == confirmPassword.text) {
-                        viewModel.register.registerUser(
+                        viewModel.registrationUser(
                             chat = chatScreen,
                             email = email.text,
                             userName = name.text,
@@ -108,5 +108,4 @@ fun RegistrationScreen(
             }
         }
     }
-
 }

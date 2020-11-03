@@ -100,20 +100,3 @@ fun ProfileAvatar(user: User?,selectImage:()->Unit) {
     }
 }
 
-/*
-@Composable
-fun ProfileAvatar(user: User?, selectImage: () -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val ringColor = remember { randomColor() }
-        CoilImage(
-            data = user?.userImage ?: vectorResource(id = R.drawable.ic_anonymous_mask),
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(200.dp)
-                .padding(10.dp)
-                .border(2.dp, ringColor, CircleShape).clickable(onClick = selectImage)
-        )
-        Spacer(modifier = Modifier.padding(5.dp))
-        Text(text = user?.userName ?: "", color = Color.White, fontSize = 40.sp)
-    }
-}*/

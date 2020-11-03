@@ -11,25 +11,23 @@ import androidx.navigation.fragment.findNavController
 import com.example.inchat.R
 import com.example.inchat.theme.InchatTheme
 import com.example.inchat.ui.signin_compose.SignInScreen
-import com.example.inchat.view_model.RegistrationViewModel
+import com.example.inchat.view_model.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
-    private val viewModel: RegistrationViewModel by viewModels()
+    private val viewModel:SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.register.autoLogin {
-            chatScreen()
-        }
+        viewModel.autoLogin { chatScreen() }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return ComposeView(requireContext()).apply {
             setContent {
                 InchatTheme {
