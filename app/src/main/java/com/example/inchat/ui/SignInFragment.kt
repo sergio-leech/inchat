@@ -16,12 +16,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
-    private val viewModel:SignInViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.autoLogin { chatScreen() }
-
     }
 
     override fun onCreateView(
@@ -31,17 +30,20 @@ class SignInFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 InchatTheme {
-                    SignInScreen(viewModel = viewModel,signUp = {signUp()},chatScreen = {chatScreen()})
+                    SignInScreen(
+                        viewModel = viewModel,
+                        signUp = { signUp() },
+                        chatScreen = { chatScreen() })
                 }
             }
         }
     }
-  private fun signUp(){
-      this.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
-  }
-  private fun chatScreen(){
-    this.findNavController().navigate(R.id.action_signInFragment_to_chatFragment)
 
-  }
+    private fun signUp() {
+        this.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+    }
 
+    private fun chatScreen() {
+        this.findNavController().navigate(R.id.action_signInFragment_to_chatFragment)
+    }
 }

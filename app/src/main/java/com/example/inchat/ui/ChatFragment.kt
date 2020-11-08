@@ -32,6 +32,7 @@ class ChatFragment : Fragment() {
             val message = binding.inputMessage.text.toString()
             if (message.isNotEmpty()) {
                 chatViewModel.sendMessage(message)
+                chatViewModel.sendNotification(message = message)
             }
             binding.inputMessage.setText("")
         }
@@ -44,7 +45,6 @@ class ChatFragment : Fragment() {
             binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount)
 
         }
-
         return binding.root
     }
 

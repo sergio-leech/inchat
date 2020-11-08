@@ -1,11 +1,15 @@
 package com.example.inchat.view_model
 
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.inchat.model.Message
+import com.example.inchat.model.NotificationData
+import com.example.inchat.model.PushNotificationMessage
 import com.example.inchat.model.User
+import com.example.inchat.notification.NotificationApi
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,11 +20,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class ChatViewModel @ViewModelInject constructor(@Assisted savedStateHandle: SavedStateHandle) :
+class ChatViewModel @ViewModelInject constructor(
+    private val notificationApi: NotificationApi,
+    @Assisted savedStateHandle: SavedStateHandle
+) :
     ViewModel() {
-    val id = savedStateHandle.get<String>("userId")
+    private val id = savedStateHandle.get<String>("userId")
+    private val userName = savedStateHandle.get<String>("userName")
 
-    private val firebaseAuth = Firebase.auth.currentUser?.uid
+    private val firebaseAuth = Firebase.auth.currentUser
+
     private val databaseReference = Firebase.database
 
     private var _currentUser = MutableLiveData<User?>()
@@ -55,16 +64,15 @@ class ChatViewModel @ViewModelInject constructor(@Assisted savedStateHandle: Sav
     private suspend fun sendMessageInFirebase(message: String) {
         val hashMap: HashMap<String, String> = HashMap()
         hashMap.apply {
-            put("senderId", firebaseAuth.toString())
+            put("senderId", firebaseAuth?.uid.toString())
             put("receiverId", id.toString())
             put("message", message)
         }
         databaseReference.reference.child("Chat").push().setValue(hashMap).await()
-
     }
 
     private fun readMessage() {
-        val senderId = firebaseAuth
+        val senderId = firebaseAuth?.uid
         val receiverId = id
         val list: MutableList<Message>? = ArrayList()
 
@@ -89,5 +97,27 @@ class ChatViewModel @ViewModelInject constructor(@Assisted savedStateHandle: Sav
             }
 
         })
+    }
+
+    fun sendNotification(message: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val topic = "/topics/$id"
+                val pushNotificationMessage = PushNotificationMessage(
+                    NotificationData(
+                        title = firebaseAuth?.displayName.toString(),
+                        message = message
+                    ), to = topic
+                )
+                val response = notificationApi.postNotification(message = pushNotificationMessage)
+                if (response.isSuccessful) {
+                    Log.d("TAG", "Send Notification Is Successful")
+                } else {
+                    Log.e("TAG", response.errorBody()!!.string())
+                }
+            } catch (e: Exception) {
+                e.message
+            }
+        }
     }
 }

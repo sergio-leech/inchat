@@ -23,13 +23,13 @@ import java.util.*
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
+
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var getContent: ActivityResultLauncher<String>
     private val firebaseAuth = Firebase.auth
     private val storage = Firebase.storage.reference
     private val databaseReference =
         Firebase.database.getReference("Users").child(firebaseAuth.uid.toString())
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

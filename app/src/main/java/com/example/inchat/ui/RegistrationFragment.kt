@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
-  private val viewModel:RegistrationViewModel by viewModels()
+    private val viewModel: RegistrationViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,18 +24,20 @@ class RegistrationFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 InchatTheme {
-                  RegistrationScreen(viewModel = viewModel, chatScreen = { chatScreen() }, signIn ={signIn()})
+                    RegistrationScreen(
+                        viewModel = viewModel,
+                        chatScreen = { chatScreen() },
+                        signIn = { signIn() })
                 }
             }
         }
     }
-     private fun chatScreen(){
-         this.findNavController().navigate(R.id.action_signUpFragment_to_chatFragment)
 
-     }
+    private fun chatScreen() {
+        this.findNavController().navigate(R.id.action_signUpFragment_to_chatFragment)
+    }
 
-    private fun signIn(){
+    private fun signIn() {
         this.findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
-
     }
 }

@@ -43,7 +43,6 @@ fun Chat(name: String, list: List<Message>) {
                         softwareController?.hideSoftwareKeyboard()
                     }
                 }
-
             )
             Button(
                 backgroundColor = Color.Black,
@@ -52,8 +51,5 @@ fun Chat(name: String, list: List<Message>) {
                 Text(text = "GO", color = Color.Green)
             }
         }
-
     }
-
-
 }

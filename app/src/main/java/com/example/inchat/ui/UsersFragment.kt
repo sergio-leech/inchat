@@ -18,6 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class UsersFragment : Fragment() {
     private val viewModel: UsersViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.subscribeToTopic()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

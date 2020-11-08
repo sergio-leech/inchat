@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class UsersViewModel @ViewModelInject constructor() : ViewModel() {
@@ -50,5 +51,9 @@ class UsersViewModel @ViewModelInject constructor() : ViewModel() {
                     }
                 }
             })
+    }
+
+    fun subscribeToTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/${firebaseAuth.currentUser?.uid}")
     }
 }

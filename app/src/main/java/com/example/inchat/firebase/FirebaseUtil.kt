@@ -1,6 +1,7 @@
 package com.example.inchat.firebase
 
 
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -12,14 +13,29 @@ class FirebaseUtil @Inject constructor() {
     private val firebaseAuth = Firebase.auth
     private val databaseReference = Firebase.database
 
-
     suspend fun registerUser(userName: String, email: String, password: String, chat: () -> Unit) {
         val authResult = registrationWithEmailAndPassword(email = email, password = password)
         if (authResult) {
             val saveData = saveDataInDatabaseReference(userName = userName)
             if (saveData) {
-                chat()
+                val updateProfile = updateProfile(userName = userName)
+                if (updateProfile) {
+                    chat()
+                }
             }
+        }
+    }
+
+    private suspend fun updateProfile(userName: String): Boolean {
+        return try {
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(userName)
+                .build()
+            firebaseAuth.currentUser?.updateProfile(profileUpdates)?.await()
+            true
+        } catch (e: Exception) {
+            e.message
+            false
         }
     }
 
@@ -48,7 +64,6 @@ class FirebaseUtil @Inject constructor() {
             e.message
             false
         }
-
     }
 
     fun autoLogin(chat: () -> Unit) {
@@ -62,21 +77,20 @@ class FirebaseUtil @Inject constructor() {
         signIn()
     }
 
-   suspend fun signIn(email: String, password: String, chat: () -> Unit) {
-        val signInRes = enter(email = email,password = password)
-        if (signInRes){
+    suspend fun signIn(email: String, password: String, chat: () -> Unit) {
+        val signInRes = enter(email = email, password = password)
+        if (signInRes) {
             chat()
         }
     }
 
-    private suspend fun enter(email: String, password: String):Boolean{
-       return try {
+    private suspend fun enter(email: String, password: String): Boolean {
+        return try {
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
-           true
-        }catch (e:Exception){
-           e.message
-           false
-       }
+            true
+        } catch (e: Exception) {
+            e.message
+            false
+        }
     }
-
 }

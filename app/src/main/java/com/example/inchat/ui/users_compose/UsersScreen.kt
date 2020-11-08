@@ -26,13 +26,13 @@ import kotlin.random.Random
 
 @Composable
 fun UsersScreen(viewModel: UsersViewModel, userProfile: () -> Unit,view: View) {
-
+           val user = viewModel.userCurrent
         Scaffold(
             backgroundColor = Color.Black,
             topBar = {
                 TopAppBar(backgroundColor = Color.Black, elevation = 4.dp) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Avatar(user =viewModel.userCurrent, profile = userProfile)
+                        Avatar(user =user, profile = userProfile)
 
                     }
                 }
@@ -41,8 +41,8 @@ fun UsersScreen(viewModel: UsersViewModel, userProfile: () -> Unit,view: View) {
             Column(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
                 val userList= viewModel.userList
                 ScrollableColumn(modifier = Modifier.fillMaxWidth()) {
-                    userList?.forEach { user->
-                        UserItem(user = user,id = user.userId,view )
+                    userList.forEach { user->
+                        UserItem(user = user,id = user.userId,view = view,userName =user.userName  )
                         Spacer(modifier = Modifier.padding(4.dp))
                     }
                 }
@@ -51,10 +51,10 @@ fun UsersScreen(viewModel: UsersViewModel, userProfile: () -> Unit,view: View) {
 }
 
 @Composable
-fun UserItem(user: User,id:String,view:View) {
+fun UserItem(user: User,id:String,view:View,userName:String) {
     Row(
         modifier = Modifier.background(Color.Black).padding(start = 10.dp, top = 5.dp).clickable(
-            onClick = { navigationToChat(view = view,id = id)}
+            onClick = { navigationToChat(view = view,id = id,currentUserName = userName)}
         )
     ) {
         UserPhoto(photo = user.userImage)
@@ -136,7 +136,7 @@ fun randomColor():Color= Color(
     blue = Random.nextInt(0,255)
 )
 
-fun navigationToChat(id:String,view:View){
-    val bundle = bundleOf("userId" to id)
+fun navigationToChat(id:String,view:View,currentUserName:String){
+    val bundle = bundleOf("userId" to id,"userName" to currentUserName)
     view.findNavController().navigate(R.id.action_chatFragment_to_chatFragment2,bundle)
 }
