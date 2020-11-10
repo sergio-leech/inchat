@@ -9,7 +9,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.inchat.R
 import com.example.inchat.theme.InchatTheme
 import com.example.inchat.ui.profile_compose.ProfileScreen
@@ -35,7 +34,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         getContent = requireActivity().activityResultRegistry.register(
             "key",
             this,
@@ -69,7 +67,7 @@ class ProfileFragment : Fragment() {
 
     private fun navigationToSignIn() {
         viewModel.exitFromProfile {
-            this.findNavController().navigate(R.id.action_profileFragment_to_signInFragment)
+            (activity as MainActivity).navController.navigate(R.id.action_profileFragment_to_signInFragment)
         }
     }
 

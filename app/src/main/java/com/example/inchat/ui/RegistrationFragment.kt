@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.inchat.R
 import com.example.inchat.theme.InchatTheme
 import com.example.inchat.ui.registration_compose.RegistrationScreen
@@ -34,10 +33,10 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun chatScreen() {
-        this.findNavController().navigate(R.id.action_signUpFragment_to_chatFragment)
+        (activity as MainActivity).navController.navigate(R.id.action_signUpFragment_to_chatFragment)
     }
 
     private fun signIn() {
-        this.findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+        (activity as MainActivity).navController.navigate(R.id.action_signUpFragment_to_signInFragment)
     }
 }

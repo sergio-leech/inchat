@@ -11,9 +11,9 @@
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_chatFragment"
-            app:destination="@id/chatFragment"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/signInFragment"
+            app:destination="@id/navigation5"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
@@ -26,27 +26,13 @@
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_chatFragment"
-            app:destination="@id/chatFragment"
+            app:destination="@id/navigation5"
             app:launchSingleTop="false"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.example.inchat.ui.UsersFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" >
-        <action
-            android:id="@+id/action_chatFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@id/chatFragment" />
-        <action
-            android:id="@+id/action_chatFragment_to_chatFragment2"
-            app:destination="@id/chatFragment2"
-            app:popUpTo="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -57,9 +43,27 @@
             android:id="@+id/action_profileFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/chatFragment2"
-        android:name="com.example.inchat.ui.ChatFragment"
-        android:label="fragment_chat2"
-        tools:layout="@layout/fragment_chat" />
+    <navigation
+        android:id="@+id/navigation5"
+        app:startDestination="@id/chatFragment">
+        <fragment
+            android:id="@+id/chatFragment2"
+            android:name="com.example.inchat.ui.ChatFragment"
+            android:label="fragment_chat2"
+            tools:layout="@layout/fragment_chat" />
+        <fragment
+            android:id="@+id/chatFragment"
+            android:name="com.example.inchat.ui.UsersFragment"
+            android:label="fragment_chat"
+            tools:layout="@layout/fragment_chat">
+            <action
+                android:id="@+id/action_chatFragment_to_profileFragment"
+                app:destination="@id/profileFragment"
+                app:popUpTo="@id/chatFragment" />
+            <action
+                android:id="@+id/action_chatFragment_to_chatFragment2"
+                app:destination="@id/chatFragment2"
+                app:popUpTo="@id/chatFragment" />
+        </fragment>
+    </navigation>
 </navigation>

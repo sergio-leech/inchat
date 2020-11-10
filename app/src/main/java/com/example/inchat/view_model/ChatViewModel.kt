@@ -106,7 +106,7 @@ class ChatViewModel @ViewModelInject constructor(
                 val pushNotificationMessage = PushNotificationMessage(
                     NotificationData(
                         title = firebaseAuth?.displayName.toString(),
-                        message = message
+                        message = message,userId = firebaseAuth?.uid.toString(),
                     ), to = topic
                 )
                 val response = notificationApi.postNotification(message = pushNotificationMessage)

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.inchat.R
 import com.example.inchat.theme.InchatTheme
 import com.example.inchat.ui.signin_compose.SignInScreen
@@ -40,10 +39,12 @@ class SignInFragment : Fragment() {
     }
 
     private fun signUp() {
-        this.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        (activity as MainActivity).navController.navigate(R.id.action_signInFragment_to_signUpFragment)
     }
 
     private fun chatScreen() {
-        this.findNavController().navigate(R.id.action_signInFragment_to_chatFragment)
+        if( (activity as MainActivity).navController.currentDestination?.id == R.id.signInFragment ){
+            (activity as MainActivity).navController.navigate(R.id.action_signInFragment_to_chatFragment)
+        }
     }
 }

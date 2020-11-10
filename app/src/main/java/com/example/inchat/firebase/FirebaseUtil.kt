@@ -73,6 +73,7 @@ class FirebaseUtil @Inject constructor() {
     }
 
     fun exitFromProfile(signIn: () -> Unit) {
+        firebaseAuth.currentUser?.delete()
         firebaseAuth.signOut()
         signIn()
     }

@@ -43,7 +43,6 @@ class ChatFragment : Fragment() {
         chatViewModel.listMessage.observe(viewLifecycleOwner) { message ->
             adapter.submitList(message)
             binding.chatRecyclerView.smoothScrollToPosition(adapter.itemCount)
-
         }
         return binding.root
     }

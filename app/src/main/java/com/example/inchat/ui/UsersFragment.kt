@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.inchat.R
 import com.example.inchat.theme.InchatTheme
 import com.example.inchat.ui.users_compose.UsersScreen
@@ -30,13 +29,13 @@ class UsersFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 InchatTheme() {
-                    UsersScreen(viewModel = viewModel, userProfile = { navigationToProfile() },this)
+                    UsersScreen(viewModel = viewModel, userProfile = { navigationToProfile() },requireActivity())
                 }
             }
         }
     }
 
     private fun navigationToProfile() {
-        this.findNavController().navigate(R.id.action_chatFragment_to_profileFragment)
+        (activity as MainActivity).navController.navigate(R.id.action_chatFragment_to_profileFragment)
     }
 }
